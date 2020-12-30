@@ -7,3 +7,6 @@ https://elasticsearch.cn/explore
 ..
 ##工具
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
+
+##备注
+修改readme
