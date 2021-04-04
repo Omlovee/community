@@ -26,7 +26,6 @@ public class PaginationDTO<T> {
             totalPage = totalCount / size + 1;
         }
 
-
         this.page = page;
 
         pages.add(page);

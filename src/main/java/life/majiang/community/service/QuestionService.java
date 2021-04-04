@@ -36,16 +36,18 @@ public class QuestionService {
 
     public PaginationDTO list(String search,Integer page, Integer size) {
 
-        if(StringUtils.isNotBlank(search)) {
+        if(StringUtils.isNotBlank(search)) {//判断search是否为空
 
-            String[] tags = StringUtils.split(search," ");
-            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+            String[] tags = StringUtils.split(search," ");//将搜索值以空格拆分
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));//在拆分处加上或算法
         }
 
         PaginationDTO paginationDTO = new PaginationDTO();
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
         Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
+
+
         paginationDTO.setPagination(totalCount,page,size);
         if(page<1){
             page =1;
@@ -63,6 +65,9 @@ public class QuestionService {
         List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
+        /**
+         * 复制结果集，加入user元素
+         * */
         for (Question question : questions) {
             User user= userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();

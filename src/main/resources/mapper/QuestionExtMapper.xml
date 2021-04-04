@@ -25,7 +25,7 @@
     where id = #{id}
   </update>
     <select id="selectRelated" parameterType="life.majiang.community.model.Question" resultMap="BaseResultMap">
-       select * from QUESTION where id !=#{id} and tag regexp #{tag}
+       select * from QUESTION where id = #{id} and tag regexp #{tag}
     </select>
     <select id="countBySearch" parameterType="life.majiang.community.dto.QuestionQueryDTO" resultType="java.lang.Integer">
        select count(*) from QUESTION
